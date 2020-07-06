@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity"
+    android:layout_centerHorizontal="true"
+    android:layout_centerInParent="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/logo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
+        >
+
+        <Button
+            android:id="@+id/btnSignIn"
+            android:layout_width="100sp"
+            android:layout_height="50sp"
+            android:layout_margin="6dp"
+            android:layout_weight="1.0"
+            android:text="Sign In"
+            android:textSize="12sp"
+            android:background="@drawable/circle_button"/>
+
+        <Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="150sp"
+            android:layout_height="50sp"
+            android:layout_margin="6dp"
+            android:text="Create an account"
+            android:textSize="12sp"
+            android:layout_weight="1.0"
+            android:background="@drawable/circle_button"
+
+            />
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

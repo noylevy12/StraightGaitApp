@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="230dp"
+            android:layout_height="69dp"
+            app:srcCompat="@drawable/logo" />
+
+        <EditText
+            android:inputType="textEmailAddress"
+            android:id="@+id/editTxtEmail"
+            android:hint="Enter your email"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            />
+
+
+        <EditText
+            android:inputType="textPassword"
+            android:id="@+id/editTxtPassword"
+            android:hint="Enter password"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+        <EditText
+            android:inputType="text"
+            android:id="@+id/editTxtName"
+            android:hint="First Name"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+        <EditText
+            android:inputType="text"
+            android:id="@+id/editTxtLastName"
+            android:hint="Last Name"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+        <EditText
+            android:inputType="date"
+            android:id="@+id/editTxtBirthDate"
+            android:hint="Birth Date"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:text="Gender:"
+            android:id="@+id/textViewGender"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupGender"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Gender">
+
+            <RadioButton
+                android:id="@+id/radioButtonFemale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Female" />
+
+            <RadioButton
+                android:id="@+id/radioButtonMale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Male" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:text="Sign Up"
+            android:layout_width="100sp"
+            android:layout_margin="20dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_button"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:text="Already Register? Sign In Here"
+            android:id="@+id/textViewSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

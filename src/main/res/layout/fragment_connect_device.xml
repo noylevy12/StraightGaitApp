@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Connect Device Fragment"-->
+<!--        android:textSize="30sp"-->
+<!--        android:layout_centerInParent="true"/>-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!--bluetooth icon (on/off)-->
+        <ImageView
+            android:id="@+id/imageViewBlt"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
+
+        <TextView
+            android:id="@+id/textViewStatusBlt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp"
+            android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+
+        <ImageButton
+            android:src="@drawable/ic_connect_bluetooth"
+            android:id="@+id/btnOn"
+            android:text="on"
+            android:layout_width="60dp"
+            android:layout_margin="14dp"
+            android:layout_height="60dp"
+            android:background="@drawable/circle_button"
+            android:textSize="14sp"
+            />
+<!--        android:background="@android:color/holo_green_light"-->
+        <ImageButton
+            android:src="@drawable/ic_disconnect_bluetooth"
+            android:id="@+id/btnOff"
+            android:text="off"
+            android:layout_width="60dp"
+            android:layout_margin="14dp"
+            android:layout_height="60dp"
+            android:background="@drawable/circle_button"
+            android:textSize="14sp"
+
+            />
+
+        <Button
+            android:id="@+id/btnDiscover"
+            android:text="Scan"
+            android:layout_width="60sp"
+            android:layout_margin="14dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_button"
+            android:textSize="14sp"
+            />
+
+
+
+        <Button
+            android:id="@+id/btnPairedDevices"
+            android:text="Paired"
+            android:layout_width="80sp"
+            android:layout_margin="14dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_button"
+            android:textSize="14sp"
+            />
+    </LinearLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ListView
+                android:id="@+id/listViewScanBlt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <ListView
+                android:id="@+id/listViewBlt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

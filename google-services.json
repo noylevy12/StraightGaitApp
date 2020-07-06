@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "912032001602",
+    "firebase_url": "https://straightgaitapp.firebaseio.com",
+    "project_id": "straightgaitapp",
+    "storage_bucket": "straightgaitapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912032001602:android:a61d76a01653e1ba0e87db",
+        "android_client_info": {
+          "package_name": "com.example.straightgaitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912032001602-44c3r2c0eonqk6ok7el8lgerrmot21d9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.straightgaitapp",
+            "certificate_hash": "96a2b801e4fce3d8359a5784d0c55d8fb28b7864"
+          }
+        },
+        {
+          "client_id": "912032001602-vpsnsu1v7ltfriol564j4nor3dptpctj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQBGLglohQaxRhxL-5tyFWg9SrE_E9Xjc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912032001602-vpsnsu1v7ltfriol564j4nor3dptpctj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
