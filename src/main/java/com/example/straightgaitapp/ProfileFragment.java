@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -44,8 +45,7 @@ import java.util.Map;
 public class ProfileFragment extends Fragment {
     private static final String TAG = "ProfileFragment";
 
-    Button btnConnectDevice;
-    private FirebaseAuth firebaseAuth;
+    Button btnEditProfile;
     private FirebaseFirestore db;
     private String userId;
     private DocumentReference usersDocRef, legMovmentsDocRef;
@@ -65,6 +65,24 @@ public class ProfileFragment extends Fragment {
         textViewUserName = (TextView) rootView.findViewById(R.id.textViewUserName);
         textViewStartDate = (TextView) rootView.findViewById(R.id.textViewStartDate);
         textViewLastDate = (TextView) rootView.findViewById(R.id.textViewLastDate);
+        btnEditProfile = (Button) rootView.findViewById(R.id.btnEditProfile);
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create new fragment and transaction
+                Fragment updateProfileFragment = new UpdateProfileFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                // Replace whatever is in the fragment_container view with this fragment,
+                // and add the transaction to the back stack
+                transaction.replace(R.id.fragmant_container, updateProfileFragment);
+                transaction.addToBackStack(null);
+                // Commit the transaction
+                transaction.commit();
+            }
+        });
+
+
+
 
         // ----------------------------------    line chart    -----------------------------------------------------
        lineChartZeroStatus = (LineChart) rootView.findViewById(R.id.lineChartLegStatusZero);
@@ -76,9 +94,9 @@ public class ProfileFragment extends Fragment {
        monthAndYearFormat = new SimpleDateFormat("MMM\nyyyy", new Locale("en"));
        dayAndMonthFormat = new SimpleDateFormat("dd\nMMM", new Locale("en"));
        dayAndMonthNoSpaceFormat = new SimpleDateFormat("dd MMM", new Locale("en"));
-        firebaseAuth = FirebaseAuth.getInstance();
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();
-        userId = firebaseAuth.getCurrentUser().getUid();
+//        userId = firebaseAuth.getCurrentUser().getUid();
         usersDocRef = db.collection("users").document(userId);
         setUiUserInfo();
 
@@ -249,32 +267,11 @@ public class ProfileFragment extends Fragment {
         lineChart.setPadding(20,20,20,20);
         lineChart.getDescription().setEnabled(false);
 
-
-//        LimitLine upLimitLine = new LimitLine(30f, "Danger");
-//        upLimitLine.setLineWidth(4f);
-//        upLimitLine.enableDashedLine(10f, 10f, 0f);
-//        upLimitLine.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
-//        upLimitLine.setTextSize(15f);
-//
-//        YAxis leftAxis = lineChart.getAxisLeft();
-//        leftAxis.removeAllLimitLines();
-//        leftAxis.addLimitLine(upLimitLine);
-
-//        ArrayList<Entry> yValues = new ArrayList<>();
-//        yValues.add(new Entry(0,60));
-//        yValues.add(new Entry(1,70));
-//        yValues.add(new Entry(2,80));
-//        yValues.add(new Entry(3,30));
-//        yValues.add(new Entry(4,6));
-//        yValues.add(new Entry(5,10));
-//        yValues.add(new Entry(6,65));
-
         //set values
         LineDataSet set1 = new LineDataSet(yValues, chartName);
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(xValues));
         xAxis.setGranularity(1);
-//        xAxis.setSpaceMin(0.02f);
         xAxis.setDrawGridLines(false);
         xAxis.setTextSize(12f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -302,8 +299,6 @@ public class ProfileFragment extends Fragment {
         LineData data = new LineData(dataSets);
         lineChart.setExtraOffsets(20,20,30,20);
 
-
-
         lineChart.setData(data);
         lineChart.invalidate();
         lineChart.animateXY(2000, 2000);
@@ -330,4 +325,6 @@ public class ProfileFragment extends Fragment {
             return values[(int)value];
         }
     }
+
+
 }

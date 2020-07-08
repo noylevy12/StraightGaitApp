@@ -8,21 +8,27 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tiny_form_background"/>
 
     <LinearLayout
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="33dp">
 
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/logo" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:srcCompat="@drawable/logo" />-->
 
         <EditText
             android:inputType="textEmailAddress"
@@ -30,7 +36,11 @@
             android:hint="Enter your email"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"/>
+            android:layout_margin="5dp"
+            android:drawableLeft="@drawable/ic_mail_outline_green"
+            android:background="@drawable/rectangle_shadow"
+            android:padding="10dp"
+            />
 
 
         <EditText
@@ -39,18 +49,21 @@
             android:hint="Enter your password"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="5dp"
+            android:drawableLeft="@drawable/ic_lock_outline_green"
+            android:background="@drawable/rectangle_shadow"
+            android:padding="10dp"
             />
 
         <Button
             android:id="@+id/btnSignIn"
             android:text="Sign In"
             android:layout_width="100sp"
-            android:layout_margin="20dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50sp"
+            android:layout_margin="6dp"
             android:textSize="14sp"
             android:background="@drawable/circle_button"
-            />
+            android:textColor="@color/colorWhite"/>
 
         <TextView
         android:textAlignment="center"
@@ -71,6 +84,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="16sp"
+            android:layout_marginBottom="40dp"
             />
     </LinearLayout>
 

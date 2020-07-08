@@ -43,7 +43,8 @@
             android:layout_weight="1.0"
             android:text="Sign In"
             android:textSize="12sp"
-            android:background="@drawable/circle_button"/>
+            android:background="@drawable/circle_button"
+            android:textColor="@color/colorWhite"/>
 
         <Button
             android:id="@+id/btnSignUp"

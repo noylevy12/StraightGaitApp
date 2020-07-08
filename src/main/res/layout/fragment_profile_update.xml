@@ -34,7 +34,7 @@
         <EditText
             android:inputType="textEmailAddress"
             android:id="@+id/editTxtEmail"
-            android:hint="Enter your email"
+            android:hint="E-mail"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -45,17 +45,6 @@
 
 
         <EditText
-            android:inputType="textPassword"
-            android:id="@+id/editTxtPassword"
-            android:hint="Enter password"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:drawableLeft="@drawable/ic_lock_outline_green"
-            android:background="@drawable/rectangle_shadow"
-            android:padding="10dp"
-            />
-        <EditText
             android:inputType="text"
             android:id="@+id/editTxtName"
             android:hint="First Name"
@@ -63,9 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:drawableLeft="@drawable/ic_account_box_green"
-
             android:background="@drawable/rectangle_shadow"
             android:padding="10dp"/>
+
         <EditText
             android:inputType="text"
             android:id="@+id/editTxtLastName"
@@ -76,10 +65,11 @@
             android:drawableLeft="@drawable/ic_account_box_green"
             android:background="@drawable/rectangle_shadow"
             android:padding="10dp"/>
+
         <EditText
             android:inputType="date"
             android:id="@+id/editTxtBirthDate"
-            android:hint="Birth Date"
+            android:hint="Birth date"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -119,8 +109,18 @@
         </RadioGroup>
 
         <Button
-            android:id="@+id/btnRegister"
-            android:text="Sign Up"
+            android:id="@+id/btnResetPassword"
+            android:text="Reset Password"
+            android:layout_width="150sp"
+            android:layout_height="40sp"
+            android:layout_marginBottom="20sp"
+            android:textSize="14sp"
+            android:background="@drawable/rectangle_shadow"
+            android:textColor="@color/colorPrimary"/>
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:text="Update"
             android:layout_width="100sp"
             android:layout_height="50sp"
             android:layout_margin="8dp"
@@ -128,10 +128,12 @@
             android:background="@drawable/circle_button"
             android:textColor="@color/colorWhite"/>
 
+
+
         <TextView
             android:textAlignment="center"
-            android:text="Already Register? Sign In Here"
-            android:id="@+id/textViewSignIn"
+            android:text="Return to profile"
+            android:id="@+id/textViewReturnToProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"

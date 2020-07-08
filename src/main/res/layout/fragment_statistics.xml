@@ -12,19 +12,81 @@
         android:textSize="30sp"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"/>
-    <TextView
-        android:id="@+id/textViewStatistics"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text=""
-    android:textSize="20sp"
-    android:layout_centerInParent="true"
-    android:layout_centerHorizontal="true"/>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
 
-    <ListView
-        android:id="@+id/listViewMoves"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layoutDates"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:id="@+id/lineChartAngleAvg"
+                android:background="@drawable/rectangle_shadow"
+                android:layout_margin="20dp">
+
+            </com.github.mikephil.charting.charts.LineChart>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:id="@+id/lineChartLegStatusZero"
+                android:background="@drawable/rectangle_shadow"
+                android:layout_margin="20dp">
+
+            </com.github.mikephil.charting.charts.LineChart>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:id="@+id/lineChartLegStatusOne"
+                android:background="@drawable/rectangle_shadow"
+                android:layout_margin="20dp">
+
+            </com.github.mikephil.charting.charts.LineChart>
+
+
+        </LinearLayout>
+
+<!--        <TextView-->
+<!--            android:id="@+id/textViewStatistics"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text=""-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_centerHorizontal="true"/>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Angles samples"
+                    android:textSize="30sp"
+                    android:gravity="center">
+
+                </TextView>
+
+                <ListView
+                    android:id="@+id/listViewMoves"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->
