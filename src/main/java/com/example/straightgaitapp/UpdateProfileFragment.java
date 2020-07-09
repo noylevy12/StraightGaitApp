@@ -10,10 +10,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
@@ -38,6 +40,7 @@ public class UpdateProfileFragment extends Fragment {
 
     private String userId;
     private String firstName, lastName,email, gender, birthDate;
+    private String new_firstName, new_lastName,new_email, new_gender, new_birthDate;
     private Timestamp birthDateTS;
     private Date birthDateD;
 
@@ -52,7 +55,7 @@ public class UpdateProfileFragment extends Fragment {
 
         progressDialog = new ProgressDialog(getContext());
 
-        btnUpdate = (Button) rootView.findViewById(R.id.btnRegister);
+        btnUpdate = (Button) rootView.findViewById(R.id.btnUpdate);
         btnResetPassword = (Button) rootView.findViewById(R.id.btnResetPassword);
         editTextEmail  = (EditText) rootView.findViewById(R.id.editTxtEmail);
         editTxtName = (EditText) rootView.findViewById(R.id.editTxtName);
@@ -62,11 +65,92 @@ public class UpdateProfileFragment extends Fragment {
         radioButtonFemale = (RadioButton) rootView.findViewById(R.id.radioButtonFemale);
         radioButtonMale = (RadioButton) rootView.findViewById(R.id.radioButtonMale);
         radioGroupGender = (RadioGroup) rootView.findViewById(R.id.radioGroupGender);
-
         setUiUserInfo();
+
+        textViewReturnToProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create new fragment and transaction
+                Fragment profileFragment = new ProfileFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                // Replace whatever is in the fragment_container view with this fragment,
+                // and add the transaction to the back stack
+                transaction.replace(R.id.fragmant_container, profileFragment);
+                transaction.addToBackStack(null);
+                // Commit the transaction
+                transaction.commit();
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            if(isFirstNameChange()|| isLastNameChange() || isMailChange() || isBirthDateChange() || isGenderChange()){
+                setUiUserInfo();
+                Toast.makeText(getContext(), "Data has been updated", Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(getContext(), "No changes found, data has not been updated", Toast.LENGTH_LONG).show();
+            }
+            }
+        });
+
 
 
         return rootView;
+    }
+    private boolean isMailChange() {
+        new_email = editTextEmail.getText().toString();
+        if(!email.equals(new_email)){
+            usersDocRef.update("email",new_email);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private boolean isBirthDateChange() {
+        new_birthDate = editTxtBirthDate.getText().toString();
+        if(!birthDate.equals(new_birthDate)){
+            usersDocRef.update("birthDate",new_birthDate);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private boolean isGenderChange() {
+        int selectedId = radioGroupGender.getCheckedRadioButtonId();
+        if(selectedId == radioButtonFemale.getId()){
+            new_gender = "female";
+        }else {
+            new_gender = "male";
+        }
+        if(!gender.equals(new_gender)){
+            usersDocRef.update("gender",new_gender);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private boolean isLastNameChange() {
+        new_lastName = editTxtLastName.getText().toString();
+        if(!lastName.equals(new_lastName)){
+            usersDocRef.update("lastName",new_lastName);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private boolean isFirstNameChange() {
+        new_firstName = editTxtName.getText().toString();
+        if(!firstName.equals(new_firstName)){
+            usersDocRef.update("firstName",new_firstName);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     private void setUiUserInfo() {
