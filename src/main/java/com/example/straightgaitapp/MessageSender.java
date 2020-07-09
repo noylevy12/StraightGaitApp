@@ -19,7 +19,7 @@ public class MessageSender extends AsyncTask<String, Void, Void> {
         String ipAddress = voids[0];
     try {
 //        socket = new Socket("192.168.254.1", 7800);
-        socket = new Socket("10.100.102.20", 7800);
+        socket = new Socket("192.168.14.12", 7800);
         printWriter = new PrintWriter(socket.getOutputStream());
         printWriter.write(ipAddress);
         printWriter.close();

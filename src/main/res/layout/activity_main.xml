@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     tools:context=".MainActivity"
     android:layout_centerHorizontal="true"
-    android:layout_centerInParent="true">
+    android:layout_centerInParent="true"
+    android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +55,8 @@
             android:text="Create an account"
             android:textSize="12sp"
             android:layout_weight="1.0"
-            android:background="@drawable/circle_button"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/rectangle_shadow"
 
             />
 
