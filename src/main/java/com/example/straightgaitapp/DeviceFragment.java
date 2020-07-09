@@ -132,11 +132,11 @@ public class DeviceFragment extends Fragment {
                         public void run() {
                             int retVal = 0;
                             if(data != null) {
-                                    Toast.makeText(thisActivity, data, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(thisActivity, data, Toast.LENGTH_SHORT).show();
                                     textViewAngle.setText("Foot angle: " + data);
                                 imageViewLeg.setRotation(parseInt(data));
 
-                                if(parseInt(data) > 30){
+                                if(parseInt(data) > 20){
                                     //The device should vibrate. The user should straighten the leg
                                     retVal = 1;
                                     textViewLegTitle.setText("Leg status:");

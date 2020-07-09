@@ -3,13 +3,48 @@
 android:orientation="vertical"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@android:color/holo_orange_light">
+android:background="@android:color/holo_orange_light"
+    >
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@drawable/background_blue"
+    >
+    <Button
+        android:id="@+id/btnVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+       android:layout_margin="16dp"
+        android:layout_gravity="center"
+        android:background="@drawable/youube"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="25dp"
+        android:textSize="20sp"
+        android:text="Questions about in-toeing and out-toeing are among of the most common reasons parents bring their children to see a pediatric orthopedist. The child's parents and often, even more so, the child's grandparents want to know if the way their child walks is normal and if the in-toeing will cause the child to fall more often.
+Many parents or other relatives were treated with special shoes or bars for a problem they had with their legs when they were young. Today, more often than not, treatment is not necessary thanks to a better understanding of what causes in-toeing and out-toeing and how these conditions get better over time.
+In-toeing arises from one of, or a combination of, three areas: the foot, the leg, or around the hip.
+Which area contributes to the in-toeing determines the likelihood that it will be corrected over time and determines up until what age one may expect improvement."/>
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Help Center Fragment"
-    android:textSize="30sp"
-    android:layout_centerInParent="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="25dp"
+        android:textSize="20sp"
+        android:text="Hence, there’s a great need for a device that can help alleviate this problem without surgery. This is exactly what StraightGait device stands for."/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="25dp"
+        android:textSize="20sp"
+        android:text="Hence, there’s a great need for a device that can help alleviate this problem without surgery. This is exactly what StraightGait device stands for."/>
+
+</LinearLayout>
+</ScrollView>
 </RelativeLayout>

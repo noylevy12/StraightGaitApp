@@ -5,13 +5,6 @@
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Statistics Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"/>
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -27,6 +20,18 @@
             android:orientation="vertical"
             android:gravity="center">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Average of sample angle"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rectangle_shadow"
+                android:textColor="@color/colorPrimary"/>
+
             <com.github.mikephil.charting.charts.LineChart
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
@@ -36,6 +41,18 @@
 
             </com.github.mikephil.charting.charts.LineChart>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Bad angles samples per day"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rectangle_shadow"
+                android:textColor="@color/colorPrimary"/>
+
             <com.github.mikephil.charting.charts.LineChart
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
@@ -44,6 +61,18 @@
                 android:layout_margin="20dp">
 
             </com.github.mikephil.charting.charts.LineChart>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Good angles samples per day"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rectangle_shadow"
+                android:textColor="@color/colorPrimary"/>
 
             <com.github.mikephil.charting.charts.LineChart
                 android:layout_width="match_parent"
@@ -69,15 +98,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_margin="20dp">
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Angles samples"
-                    android:textSize="30sp"
-                    android:gravity="center">
-
-                </TextView>
+                    android:layout_height="40dp"
+                    android:text="All angles samples"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/rectangle_shadow"
+                    android:textColor="@color/colorPrimary"/>
 
                 <ListView
                     android:id="@+id/listViewMoves"
