@@ -77,6 +77,7 @@ public class DeviceFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_device, container, false);
 
+
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         try {
@@ -84,10 +85,8 @@ public class DeviceFragment extends Fragment {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        Toast.makeText(getActivity(), SERVER_IP, Toast.LENGTH_SHORT).show();
 
-        Thread thread = new Thread(new serverThread());
-        thread.start();
+
 
 
         textViewLegStatus = (TextView) rootView.findViewById(R.id.textViewLegStatus);
@@ -105,6 +104,9 @@ public class DeviceFragment extends Fragment {
             }
         });
 
+        Thread thread = new Thread(new serverThread());
+        thread.start();
+
 
         return rootView;
 
@@ -116,6 +118,7 @@ public class DeviceFragment extends Fragment {
         BufferedReader bufferedReader;
         Handler handler = new Handler();
         String data;
+
 
         @Override
         public void run() {
@@ -222,6 +225,8 @@ public class DeviceFragment extends Fragment {
             }
         }
     }
+
+
     private String getDate(long time) {
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         cal.setTimeInMillis(time * 1000);
@@ -280,11 +285,6 @@ public class DeviceFragment extends Fragment {
 //            textViewLegTitle.setText(savedInstanceState.getString("tv_LegTitle"));
 //            textViewAngle.setText(savedInstanceState.getString("tv_Angle"));
 //        }
-
-
-
-
-
     }
 }
 
