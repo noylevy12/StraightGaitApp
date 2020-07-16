@@ -3,7 +3,6 @@ package com.example.straightgaitapp;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,9 +116,9 @@ public class StatisticsFragment extends Fragment {
                         statusZeroPerDay = countStatusPerDay(userStatusZeroMovements);
                         sampleAvgPerDay = avgAngleSample(userMovementsList);
 
-                        Log.d(TAG, "statusOnePerDay"+statusOnePerDay.toString());
-                        Log.d(TAG, "statusZeroPerDay"+statusZeroPerDay.toString());
-                        Log.d(TAG, "sampleAvgPerDay"+sampleAvgPerDay.toString());
+//                        Log.d(TAG, "statusOnePerDay"+statusOnePerDay.toString());
+//                        Log.d(TAG, "statusZeroPerDay"+statusZeroPerDay.toString());
+//                        Log.d(TAG, "sampleAvgPerDay"+sampleAvgPerDay.toString());
 
                         ArrayList<Entry> yValues = new ArrayList<>();
                         createChart(rootView, sampleAvgPerDay, "average of sample angle", lineChartAngleAvg);
