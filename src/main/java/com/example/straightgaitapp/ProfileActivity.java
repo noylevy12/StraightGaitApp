@@ -35,6 +35,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
     private FirebaseFirestore db;
     private String userId, userName, gender;
+    private static DeviceFragment deviceFragment;
+
 
 
     @Override
@@ -132,7 +134,12 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmant_container, new HelpCenterFragment()).commit();
                 break;
             case R.id.nav_connectBluetooth:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmant_container, new DeviceFragment()).commit();
+                if(deviceFragment ==null){
+                    this.deviceFragment = new DeviceFragment();
+
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmant_container, this.deviceFragment).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragmant_container, new DeviceFragment()).commit();
                 break;
             case R.id.nav_logOut:
                 firebaseAuth.signOut();
