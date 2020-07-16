@@ -85,8 +85,8 @@ public class ProfileFragment extends Fragment {
 
 
         // ----------------------------------    line chart    -----------------------------------------------------
-       lineChartZeroStatus = (LineChart) rootView.findViewById(R.id.lineChartLegStatusZero);
-       lineChartOneStatus = (LineChart) rootView.findViewById(R.id.lineChartLegStatusOne);
+//       lineChartZeroStatus = (LineChart) rootView.findViewById(R.id.lineChartLegStatusZero);
+//       lineChartOneStatus = (LineChart) rootView.findViewById(R.id.lineChartLegStatusOne);
        lineChartAngleAvg = (LineChart) rootView.findViewById(R.id.lineChartAngleAvg);
 
        // ---------------------------------    end line chart    ---------------------------------------------------
@@ -122,12 +122,12 @@ public class ProfileFragment extends Fragment {
                                      }
                                  }
                              }
-                             HashMap<String, Integer> statusOnePerDay = new HashMap<String, Integer>();
-                             HashMap<String, Integer> statusZeroPerDay = new HashMap<String, Integer>();
+//                             HashMap<String, Integer> statusOnePerDay = new HashMap<String, Integer>();
+//                             HashMap<String, Integer> statusZeroPerDay = new HashMap<String, Integer>();
                              HashMap<String, Integer> sampleAvgPerDay = new HashMap<String, Integer>();
 
-                             statusOnePerDay = countStatusPerDay(userStatusOneMovements);
-                             statusZeroPerDay = countStatusPerDay(userStatusZeroMovements);
+//                             statusOnePerDay = countStatusPerDay(userStatusOneMovements);
+//                             statusZeroPerDay = countStatusPerDay(userStatusZeroMovements);
                              sampleAvgPerDay = avgAngleSample(userMovementsList);
 
 //                             Log.d(TAG, "statusOnePerDay"+statusOnePerDay.toString());
@@ -136,8 +136,8 @@ public class ProfileFragment extends Fragment {
 
                              ArrayList<Entry> yValues = new ArrayList<>();
                              createChart(rootView, sampleAvgPerDay, "average of sample angle", lineChartAngleAvg);
-                             createChart(rootView, statusZeroPerDay, "bad angles sample per day", lineChartZeroStatus);
-                             createChart(rootView, statusOnePerDay, "good angles sample per day", lineChartOneStatus);
+//                             createChart(rootView, statusZeroPerDay, "bad angles sample per day", lineChartZeroStatus);
+//                             createChart(rootView, statusOnePerDay, "good angles sample per day", lineChartOneStatus);
                          }
                          else {
 
