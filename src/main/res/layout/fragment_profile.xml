@@ -123,23 +123,7 @@
 
                 </com.github.mikephil.charting.charts.LineChart>
 
-                <com.github.mikephil.charting.charts.LineChart
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:id="@+id/lineChartLegStatusZero"
-                    android:background="@drawable/rectangle_shadow"
-                    android:layout_margin="20dp">
 
-                </com.github.mikephil.charting.charts.LineChart>
-
-                <com.github.mikephil.charting.charts.LineChart
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:id="@+id/lineChartLegStatusOne"
-                    android:background="@drawable/rectangle_shadow"
-                    android:layout_margin="20dp">
-
-                </com.github.mikephil.charting.charts.LineChart>
 
 
             </LinearLayout>
