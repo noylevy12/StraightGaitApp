@@ -58,7 +58,7 @@ import static android.content.Context.WIFI_SERVICE;
 import static com.straightgait.straightgaitapp.App.CHANNEL_1_ID;
 import static java.lang.Integer.parseInt;
 
-public class DeviceFragment extends Fragment {
+public class DeviceFragment extends Fragment implements DialogIP.DialogIPListener {
 
     public static final String TAG = "TAG";
     Button btnConnectDevice;
@@ -73,6 +73,7 @@ public class DeviceFragment extends Fragment {
     Activity thisActivity;
     Context context;
     private NotificationManagerCompat notificationManager;
+    private String computerIpAddress;
 
 
     @Nullable
@@ -99,11 +100,12 @@ public class DeviceFragment extends Fragment {
         btnConnectDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MessageSender messageSender = new MessageSender();
-                messageSender.execute(SERVER_IP);
+//                MessageSender messageSender = new MessageSender();
+//                messageSender.execute(SERVER_IP);
+                openDialog();
 //                textViewLegStatus.setText("waiting for sensor data");
-                btnConnectDevice.setText("reconnect");
-                textViewConnectingMessage.setText("Waiting for sensor data...");
+//                btnConnectDevice.setText("reconnect");
+//                textViewConnectingMessage.setText("Waiting for sensor data...");
 
             }
         });
@@ -115,6 +117,35 @@ public class DeviceFragment extends Fragment {
         return rootView;
 
     }
+
+    private void openDialog() {
+        DialogIP dialogIP = new DialogIP(DeviceFragment.this);
+        dialogIP.show(getFragmentManager(), "Connect to device");
+    }
+
+    @Override
+    public void applyTextFromDialog(String ip) {
+        computerIpAddress = ip;
+        if(validIp(computerIpAddress)){
+            Toast.makeText(thisActivity, "the IP: "+computerIpAddress+ "is valid", Toast.LENGTH_SHORT).show();
+            MessageSender messageSender = new MessageSender(computerIpAddress);
+            messageSender.execute(SERVER_IP);
+            btnConnectDevice.setText("reconnect");
+            textViewConnectingMessage.setText("Waiting for sensor data...");
+        }else {
+            Toast.makeText(thisActivity, "the IP: "+computerIpAddress+ "is not valid", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+    }
+
+    private boolean validIp(final String ip) {
+        String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
+
+        return ip.matches(PATTERN);
+    }
+
     private class serverThread implements Runnable{
         Socket clientSocket;
         ServerSocket serverSocket;
@@ -139,7 +170,6 @@ public class DeviceFragment extends Fragment {
                         public void run() {
                             int retVal = 0;
                             if(data != null) {
-//                                    Toast.makeText(thisActivity, data, Toast.LENGTH_SHORT).show();
                                     textViewAngle.setText("current foot angle: " + data);
                                 textViewAngle.setPadding(30,10,30,10);
 
@@ -155,15 +185,6 @@ public class DeviceFragment extends Fragment {
 
                                     notificationManager = NotificationManagerCompat.from(getContext());
                                     sendNotification("Straighten your leg!", "Your leg is not in a straight line.");
-
-//                                    Vibrator v = (Vibrator) thisActivity.getSystemService(Context.VIBRATOR_SERVICE);
-//                                    // Vibrate for 500 milliseconds
-//                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                                        v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-//                                    } else {
-//                                        //deprecated in API 26
-//                                        v.vibrate(500);
-//                                    }
 
                                 }else {
                                     textViewLegTitle.setText("Leg status:");
@@ -245,6 +266,7 @@ public class DeviceFragment extends Fragment {
         String date = DateFormat.format("dd/MM/yyyy, HH:mm", cal).toString();
         return date;
     }
+
     private String getLocalIpAddress() throws UnknownHostException {
         WifiManager wifiManager = (WifiManager) thisActivity.getApplicationContext().getSystemService(WIFI_SERVICE);
         assert wifiManager != null;
@@ -252,7 +274,6 @@ public class DeviceFragment extends Fragment {
         int ipInt = wifiInfo.getIpAddress();
         return InetAddress.getByAddress(ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(ipInt).array()).getHostAddress();
     }
-
 
     private void startServer(){
 
@@ -267,7 +288,6 @@ public class DeviceFragment extends Fragment {
         server.listen(50000);
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -279,25 +299,14 @@ public class DeviceFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-
-//        outState.putString("tv_LegStatus", textViewLegStatus.getText().toString());
-//        outState.putString("tv_LegTitle", textViewLegTitle.getText().toString());
-//        outState.putString("tv_Angle", textViewAngle.getText().toString());
         super.onSaveInstanceState(outState);
-
-
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-//        if (savedInstanceState != null){
-//            textViewLegStatus.setText(savedInstanceState.getString("tv_LegStatus"));
-//            textViewLegTitle.setText(savedInstanceState.getString("tv_LegTitle"));
-//            textViewAngle.setText(savedInstanceState.getString("tv_Angle"));
-//        }
     }
+
 
     public void sendNotification(String title, String message){
         Notification notification = new NotificationCompat.Builder(getContext(),CHANNEL_1_ID)

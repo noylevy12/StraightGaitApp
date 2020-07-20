@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@color/colorPrimary">
 
     <RelativeLayout
         android:orientation="vertical"
@@ -21,113 +22,147 @@
             android:layout_marginLeft="14dp"
             />
 
-        <LinearLayout
-            android:id="@+id/layoutUserImg"
-            android:layout_width="match_parent"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:layout_marginTop="-100dp"
+    android:layout_marginRight="-50dp"
+    android:layout_marginLeft="-50dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/layoutHeader"
+    android:background="@drawable/round_background">
+
+    <LinearLayout
+        android:id="@+id/layoutUserImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="100dp"
+        >
+        <ImageView
+            android:id="@+id/imageViewUser"
+            android:layout_width="70sp"
+            android:layout_height="70sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15sp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/textViewUserName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:id="@+id/imageViewUser"
-                android:layout_width="70sp"
-                android:layout_height="70sp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15sp"
-                android:layout_centerHorizontal="true"/>
+            android:text=""
+            android:textColor="#7EC61D"
+            android:textSize="25sp"
+            android:layout_below="@+id/imageViewUser"
+            android:layout_centerHorizontal="true"/>
 
-            <TextView
-                android:id="@+id/textViewUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="#7EC61D"
-                android:textSize="25sp"
-                android:layout_below="@+id/imageViewUser"
-                android:layout_centerHorizontal="true"/>
+    </LinearLayout>
 
-        </LinearLayout>
 
+
+</LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutDates"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@id/layoutUserImg"
+            android:layout_height="106dp"
+            android:layout_below="@id/layoutHeader"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_marginTop="-50dp"
             android:gravity="center"
+            android:orientation="horizontal"
             android:paddingBottom="10dp">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginRight="60sp">
-                    <TextView
-                        android:id="@+id/textViewStartDate"
-                        android:layout_width="60sp"
-                        android:layout_height="60sp"
-                        android:text=""
-                        android:textSize="15sp"
-                        android:gravity="center"
-                        android:background="@drawable/rounded_textview"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="StrightGait Since" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginLeft="60sp">
-
-                    <TextView
-                        android:id="@+id/textViewLastDate"
-                        android:layout_width="60sp"
-                        android:layout_height="60sp"
-                        android:background="@drawable/rounded_textview"
-                        android:text=""
-                        android:gravity="center"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Last connect" />
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/layoutDates"
-                android:background="@color/colorPrimary"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60sp"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <com.github.mikephil.charting.charts.LineChart
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:id="@+id/lineChartAngleAvg"
-                    android:background="@drawable/rectangle_shadow"
-                    android:layout_margin="20dp">
+                <TextView
+                    android:id="@+id/textViewStartDate"
+                    android:layout_width="60sp"
+                    android:layout_height="60sp"
+                    android:background="@drawable/rounded_textview_background"
+                    android:gravity="center"
+                    android:text=""
+                    android:textSize="15sp" />
 
-                </com.github.mikephil.charting.charts.LineChart>
-
-
-
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="StrightGait Since"
+                    android:textColor="@color/colorWhite"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60sp"
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/textViewLastDate"
+                    android:layout_width="60sp"
+                    android:layout_height="60sp"
+                    android:background="@drawable/rounded_textview_background"
+                    android:gravity="center"
+                    android:text=""
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Last connect"
+                    android:textColor="@color/colorWhite"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layoutDates"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="-20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Recent training"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rectangle_shadow"
+                android:textColor="@color/colorPrimary"/>
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChartAngle"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_margin="20dp"
+
+                android:background="@drawable/rectangle_shadow"
+                android:padding="20dp"></com.github.mikephil.charting.charts.PieChart>
+
+<!--            <com.github.mikephil.charting.charts.LineChart-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:id="@+id/lineChartAngleAvg"-->
+<!--                android:background="@drawable/rectangle_shadow"-->
+<!--                android:layout_margin="20dp">-->
+<!--            </com.github.mikephil.charting.charts.LineChart>-->
+
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>

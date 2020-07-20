@@ -13,6 +13,11 @@ public class MessageSender extends AsyncTask<String, Void, Void> {
     Socket socket;
     DataOutputStream dataOutputStream;
     PrintWriter printWriter;
+    String hostIp;
+
+    public MessageSender(String hostIp){
+        this.hostIp = hostIp;
+    }
 
 
     @Override
@@ -20,8 +25,7 @@ public class MessageSender extends AsyncTask<String, Void, Void> {
         //get the ip of moblie
         String ipAddress = voids[0];
     try {
-//        socket = new Socket("192.168.254.1", 7800);
-        socket = new Socket("10.100.102.20", 7800);
+        socket = new Socket(hostIp, 7800);
         printWriter = new PrintWriter(socket.getOutputStream());
         printWriter.write(ipAddress);
         printWriter.close();

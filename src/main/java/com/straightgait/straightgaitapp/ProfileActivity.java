@@ -39,8 +39,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     private FirebaseFirestore db;
     private String userId, userName, gender;
     private static DeviceFragment deviceFragment;
-    private Date lastConnect;
-    private Timestamp lastDateTS;
+    private Date newLastConnect, lastConnect;
+    private Timestamp nextlastDateTS, lastDateTS;
 
 
 
@@ -69,12 +69,18 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 if(documentSnapshot.exists()){
                     userName = documentSnapshot.getString("firstName");
                     gender = documentSnapshot.getString("gender");
-                    lastDateTS = documentSnapshot.getTimestamp("nextLastDate");
-                    Log.d(TAG, lastDateTS.toString());
-
+                    nextlastDateTS = documentSnapshot.getTimestamp("nextLastDate");
+                    lastDateTS = documentSnapshot.getTimestamp("lastDate");
+                    Log.d(TAG, nextlastDateTS.toString());
                     lastConnect = lastDateTS.toDate();
-                    documentReference.update("lastDate", lastConnect);
-                    documentReference.update("nextLastDate", new Date());
+                    newLastConnect = nextlastDateTS.toDate();
+                    if (lastConnect.getDay() == newLastConnect.getDay() && lastConnect.getMonth() == newLastConnect.getMonth() && lastConnect.getYear() == newLastConnect.getYear()) {
+                        documentReference.update("nextLastDate", new Date());
+                    }else{
+                        documentReference.update("lastDate", newLastConnect);
+                        documentReference.update("nextLastDate", new Date());
+                    }
+
 
                     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                     View header = navigationView.getHeaderView(0);
