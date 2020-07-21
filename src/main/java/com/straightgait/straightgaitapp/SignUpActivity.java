@@ -1,4 +1,4 @@
-package com.example.straightgaitapp;
+package com.straightgait.straightgaitapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -151,6 +151,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     user.put("gender", gender);
                     user.put("firstDate", new Date());
                     user.put("lastDate", new Date());
+                    user.put("nextLastDate", new Date());
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

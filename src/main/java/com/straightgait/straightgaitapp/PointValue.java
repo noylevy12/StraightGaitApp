@@ -1,4 +1,4 @@
-package com.example.straightgaitapp;
+package com.straightgait.straightgaitapp;
 
 public class PointValue {
     long xValue;

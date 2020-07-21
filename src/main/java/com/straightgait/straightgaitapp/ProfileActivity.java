@@ -1,4 +1,4 @@
-package com.example.straightgaitapp;
+package com.straightgait.straightgaitapp;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,10 +20,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Date;
 
 public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -36,6 +39,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     private FirebaseFirestore db;
     private String userId, userName, gender;
     private static DeviceFragment deviceFragment;
+    private Date newLastConnect, lastConnect;
+    private Timestamp nextlastDateTS, lastDateTS;
 
 
 
@@ -56,18 +61,27 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
 
         userId = firebaseAuth.getCurrentUser().getUid();
-        DocumentReference documentReference = db.collection("users").document(userId);
+        final DocumentReference documentReference = db.collection("users").document(userId);
+
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
                     userName = documentSnapshot.getString("firstName");
                     gender = documentSnapshot.getString("gender");
-//                    Toast.makeText(ProfileActivity.this, gender, Toast.LENGTH_SHORT).show();
+                    nextlastDateTS = documentSnapshot.getTimestamp("nextLastDate");
+                    lastDateTS = documentSnapshot.getTimestamp("lastDate");
+                    Log.d(TAG, nextlastDateTS.toString());
+                    lastConnect = lastDateTS.toDate();
+                    newLastConnect = nextlastDateTS.toDate();
+                    if (lastConnect.getDay() == newLastConnect.getDay() && lastConnect.getMonth() == newLastConnect.getMonth() && lastConnect.getYear() == newLastConnect.getYear()) {
+                        documentReference.update("nextLastDate", new Date());
+                    }else{
+                        documentReference.update("lastDate", newLastConnect);
+                        documentReference.update("nextLastDate", new Date());
+                    }
 
-                    //update textview on the nav_header.xml file.
-//                    LayoutInflater inflater = (LayoutInflater)ProfileActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                    View vi = inflater.inflate(R.layout.nav_header, null); //log.xml is your file.
+
                     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                     View header = navigationView.getHeaderView(0);
                     TextView textViewHelloMessage = (TextView)header.findViewById(R.id.textViewHelloMessage); //get a reference to the textview on the nav_header.xml file.
@@ -89,6 +103,12 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 Log.d(TAG,e.toString());
             }
         });
+
+
+//        lastConnect = lastDateTS.toDate();
+//        documentReference.update("lastDate", lastConnect);
+//        documentReference.update("nextLastDate", new Date());
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -1,4 +1,4 @@
-package com.example.straightgaitapp;
+package com.straightgait.straightgaitapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

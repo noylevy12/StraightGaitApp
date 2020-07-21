@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.straightgaitapp">
+    package="com.straightgait.straightgaitapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -13,21 +13,23 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <!--        android:name="androidx.multidex.MultiDexApplication"-->
+
     <application
-        android:name="androidx.multidex.MultiDexApplication"
+        android:name= "com.straightgait.straightgaitapp.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/mini_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfileActivity"
+        <activity android:name="com.straightgait.straightgaitapp.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation"/>
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".LoginAcitivty" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.straightgait.straightgaitapp.ForgotPasswordActivity" />
+        <activity android:name="com.straightgait.straightgaitapp.LoginAcitivty" />
+        <activity android:name="com.straightgait.straightgaitapp.SignUpActivity" />
+        <activity android:name="com.straightgait.straightgaitapp.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:912032001602:android:a61d76a01653e1ba0e87db",
         "android_client_info": {
-          "package_name": "com.example.straightgaitapp"
+          "package_name": "com.straightgait.straightgaitapp"
         }
       },
       "oauth_client": [

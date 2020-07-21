@@ -1,6 +1,7 @@
-package com.example.straightgaitapp;
+package com.straightgait.straightgaitapp;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,14 +13,19 @@ public class MessageSender extends AsyncTask<String, Void, Void> {
     Socket socket;
     DataOutputStream dataOutputStream;
     PrintWriter printWriter;
+    String hostIp;
+
+    public MessageSender(String hostIp){
+        this.hostIp = hostIp;
+    }
+
 
     @Override
     protected Void doInBackground(String... voids) {
         //get the ip of moblie
         String ipAddress = voids[0];
     try {
-//        socket = new Socket("192.168.254.1", 7800);
-        socket = new Socket("10.100.102.20", 7800);
+        socket = new Socket(hostIp, 7800);
         printWriter = new PrintWriter(socket.getOutputStream());
         printWriter.write(ipAddress);
         printWriter.close();
@@ -27,8 +33,10 @@ public class MessageSender extends AsyncTask<String, Void, Void> {
 
     } catch (UnknownHostException e) {
         e.printStackTrace();
+        Log.d("MessageSender", "UnknownHostException");
     } catch (IOException e) {
         e.printStackTrace();
+        Log.d("MessageSender", "IOException");
     }
         return null;
     }

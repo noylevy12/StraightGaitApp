@@ -1,16 +1,14 @@
 
-package com.example.straightgaitapp;
+package com.straightgait.straightgaitapp;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +21,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,13 +55,14 @@ import java.util.Locale;
 import java.util.Map;
 
 import static android.content.Context.WIFI_SERVICE;
+import static com.straightgait.straightgaitapp.App.CHANNEL_1_ID;
 import static java.lang.Integer.parseInt;
 
-public class DeviceFragment extends Fragment {
+public class DeviceFragment extends Fragment implements DialogIP.DialogIPListener {
 
     public static final String TAG = "TAG";
     Button btnConnectDevice;
-    TextView textViewLegStatus, textViewAngle, textViewLegTitle;
+    TextView textViewLegStatus, textViewAngle, textViewLegTitle, textViewConnectingMessage;
     ImageView imageViewLeg;
     String SERVER_IP;
     private FirebaseFirestore db;
@@ -70,6 +71,9 @@ public class DeviceFragment extends Fragment {
     DocumentReference documentReference;
     Map<String, Object> details,legMove;
     Activity thisActivity;
+    Context context;
+    private NotificationManagerCompat notificationManager;
+    private String computerIpAddress;
 
 
     @Nullable
@@ -86,10 +90,9 @@ public class DeviceFragment extends Fragment {
             e.printStackTrace();
         }
 
-
-
-
+        context = getContext();
         textViewLegStatus = (TextView) rootView.findViewById(R.id.textViewLegStatus);
+        textViewConnectingMessage = (TextView) rootView.findViewById(R.id.textViewConnectingMessage);
         textViewAngle = (TextView) rootView.findViewById(R.id.textViewAngle);
         textViewLegTitle = (TextView) rootView.findViewById(R.id.textViewLegTitle);
         imageViewLeg = (ImageView) rootView.findViewById(R.id.imageViewLeg);
@@ -97,9 +100,12 @@ public class DeviceFragment extends Fragment {
         btnConnectDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MessageSender messageSender = new MessageSender();
-                messageSender.execute(SERVER_IP);
-                textViewLegStatus.setText("waiting for sensor data");
+//                MessageSender messageSender = new MessageSender();
+//                messageSender.execute(SERVER_IP);
+                openDialog();
+//                textViewLegStatus.setText("waiting for sensor data");
+//                btnConnectDevice.setText("reconnect");
+//                textViewConnectingMessage.setText("Waiting for sensor data...");
 
             }
         });
@@ -111,6 +117,35 @@ public class DeviceFragment extends Fragment {
         return rootView;
 
     }
+
+    private void openDialog() {
+        DialogIP dialogIP = new DialogIP(DeviceFragment.this);
+        dialogIP.show(getFragmentManager(), "Connect to device");
+    }
+
+    @Override
+    public void applyTextFromDialog(String ip) {
+        computerIpAddress = ip;
+        if(validIp(computerIpAddress)){
+            Toast.makeText(thisActivity, "the IP: "+computerIpAddress+ "is valid", Toast.LENGTH_SHORT).show();
+            MessageSender messageSender = new MessageSender(computerIpAddress);
+            messageSender.execute(SERVER_IP);
+            btnConnectDevice.setText("reconnect");
+            textViewConnectingMessage.setText("Waiting for sensor data...");
+        }else {
+            Toast.makeText(thisActivity, "the IP: "+computerIpAddress+ "is not valid", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+    }
+
+    private boolean validIp(final String ip) {
+        String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
+
+        return ip.matches(PATTERN);
+    }
+
     private class serverThread implements Runnable{
         Socket clientSocket;
         ServerSocket serverSocket;
@@ -135,8 +170,9 @@ public class DeviceFragment extends Fragment {
                         public void run() {
                             int retVal = 0;
                             if(data != null) {
-//                                    Toast.makeText(thisActivity, data, Toast.LENGTH_SHORT).show();
-                                    textViewAngle.setText("Foot angle: " + data);
+                                    textViewAngle.setText("current foot angle: " + data);
+                                textViewAngle.setPadding(30,10,30,10);
+
                                 imageViewLeg.setRotation(parseInt(data));
 
                                 if(parseInt(data) > 20){
@@ -144,21 +180,17 @@ public class DeviceFragment extends Fragment {
                                     retVal = 1;
                                     textViewLegTitle.setText("Leg status:");
                                     textViewLegStatus.setText("Straighten your leg");
-                                    textViewLegStatus.setTextColor(Color.RED);
+                                    textViewLegStatus.setTextColor(getResources().getColor(R.color.colorAccent));
+                                    textViewLegStatus.setPadding(30,10,30,10);
 
-                                    Vibrator v = (Vibrator) thisActivity.getSystemService(Context.VIBRATOR_SERVICE);
-                                    // Vibrate for 500 milliseconds
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                        v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-                                    } else {
-                                        //deprecated in API 26
-                                        v.vibrate(500);
-                                    }
+                                    notificationManager = NotificationManagerCompat.from(getContext());
+                                    sendNotification("Straighten your leg!", "Your leg is not in a straight line.");
 
                                 }else {
                                     textViewLegTitle.setText("Leg status:");
                                     textViewLegStatus.setText("OK");
-                                    textViewLegStatus.setTextColor(Color.GREEN);
+                                    textViewLegStatus.setTextColor(getResources().getColor(R.color.colorPrimary));
+                                    textViewLegStatus.setPadding(20,10,20,10);
                                 }
 
                                 Date date = new Date();
@@ -209,6 +241,7 @@ public class DeviceFragment extends Fragment {
                                 textViewLegTitle.setText("");
                                 textViewLegStatus.setText("Error read sensor data");
                                 textViewLegStatus.setTextColor(Color.BLACK);
+                                textViewLegStatus.setPadding(20,10,20,10);
                                 Toast.makeText(thisActivity, "Error read sensor data", Toast.LENGTH_SHORT).show();
 
                             }
@@ -233,6 +266,7 @@ public class DeviceFragment extends Fragment {
         String date = DateFormat.format("dd/MM/yyyy, HH:mm", cal).toString();
         return date;
     }
+
     private String getLocalIpAddress() throws UnknownHostException {
         WifiManager wifiManager = (WifiManager) thisActivity.getApplicationContext().getSystemService(WIFI_SERVICE);
         assert wifiManager != null;
@@ -240,7 +274,6 @@ public class DeviceFragment extends Fragment {
         int ipInt = wifiInfo.getIpAddress();
         return InetAddress.getByAddress(ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(ipInt).array()).getHostAddress();
     }
-
 
     private void startServer(){
 
@@ -255,7 +288,6 @@ public class DeviceFragment extends Fragment {
         server.listen(50000);
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -267,24 +299,25 @@ public class DeviceFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-
-//        outState.putString("tv_LegStatus", textViewLegStatus.getText().toString());
-//        outState.putString("tv_LegTitle", textViewLegTitle.getText().toString());
-//        outState.putString("tv_Angle", textViewAngle.getText().toString());
         super.onSaveInstanceState(outState);
-
-
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
 
-//        if (savedInstanceState != null){
-//            textViewLegStatus.setText(savedInstanceState.getString("tv_LegStatus"));
-//            textViewLegTitle.setText(savedInstanceState.getString("tv_LegTitle"));
-//            textViewAngle.setText(savedInstanceState.getString("tv_Angle"));
-//        }
+
+    public void sendNotification(String title, String message){
+        Notification notification = new NotificationCompat.Builder(getContext(),CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.mini_logo)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_ALARM)
+                .build();
+
+        notificationManager.notify(1,notification);
     }
 }
 

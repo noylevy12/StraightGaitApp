@@ -3,13 +3,35 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light">
+    android:id="@+id/layoutSettingsFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Settings Fragment"
         android:textSize="30sp"
-        android:layout_centerInParent="true"/>
-
+        android:layout_centerHorizontal="true"/>
+    <Switch
+    android:id="@+id/switchNotification"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:switchMinWidth="56dp"
+    android:layout_marginLeft="100dp"
+    android:layout_marginTop="120dp"
+    android:text="Notification"
+    android:checked="true"
+    android:textOff="OFF"
+    android:textOn="ON"/>
+    <Switch
+        android:id="@+id/switchVibration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:switchMinWidth="56dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="120dp"
+        android:text="Vibration"
+        android:layout_below="@id/switchNotification"
+        android:checked="true"
+        android:textOff="OFF"
+        android:textOn="ON"/>
 </RelativeLayout>

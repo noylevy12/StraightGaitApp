@@ -1,4 +1,4 @@
-package com.example.straightgaitapp;
+package com.straightgait.straightgaitapp;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;

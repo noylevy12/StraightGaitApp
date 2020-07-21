@@ -1,8 +1,9 @@
-package com.example.straightgaitapp;
+package com.straightgait.straightgaitapp;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class StatisticsFragment extends Fragment {
     private static final String TAG = "StatisticsFragment";
@@ -207,9 +209,10 @@ public class StatisticsFragment extends Fragment {
             movementHolder.textViewAngle.setText("Angle: " +movement.getAngle());
             movementHolder.textViewDate.setText("Time: "+ movement.getDateStr(movement.getDate()));
             if(movement.getStatus() == 1 ){
-                movementHolder.textViewAngle.setTextColor(Color.RED);
+                movementHolder.textViewAngle.setTextColor(getResources().getColor(R.color.colorAccent));
+
             }else {
-                movementHolder.textViewAngle.setTextColor(Color.GREEN);
+                movementHolder.textViewAngle.setTextColor(getResources().getColor(R.color.colorPrimary));
             }
 
             return view;
@@ -266,7 +269,7 @@ public class StatisticsFragment extends Fragment {
             for (String key : entry.keySet()) {
                 if(key.equals("date")){
                     String date = getDate((long) entry.get(key));
-//                  Log.d(TAG, "date: "+ date);
+                  Log.d(TAG, "date: "+ date);
                     if(res.containsKey(date)){
                         int count = res.get(date);
                         count++;
@@ -284,7 +287,12 @@ public class StatisticsFragment extends Fragment {
         ArrayList<Entry> yValues = new ArrayList<>();
         int count =0;
         String[] xValues = new String[queryList.size()];
-        for (Map.Entry<String, Integer> entry : queryList.entrySet()) {
+//        Log.d(TAG, "queryList"+queryList.toString());
+        Map<String, Integer> queryList1 = new TreeMap(queryList);
+
+//        Log.d(TAG, "queryList1"+queryList1.toString());
+
+        for (Map.Entry<String, Integer> entry : queryList1.entrySet()) {
             String key = entry.getKey();
             xValues[count] = key;
             Integer value = entry.getValue();
@@ -292,7 +300,8 @@ public class StatisticsFragment extends Fragment {
             yValues.add(new Entry(count,value));
             count++;
         }
-
+//        Log.d(TAG, "yValues"+yValues.toString());
+//        Log.d(TAG, "xValues"+ Arrays.toString(xValues));
         renderChart(rootView, yValues, xValues, chartName, lineChart);
     }
 
